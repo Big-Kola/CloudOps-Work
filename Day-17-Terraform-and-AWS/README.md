@@ -12,7 +12,7 @@ You'll need:
 
 ## Task
 
-1. **Configure AWS provider** — `provider.tf`
+1. **Configure AWS provider** — `provider.tf` — [AWS provider docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs), [S3 backend docs](https://developer.hashicorp.com/terraform/language/settings/backends/s3)
    ```hcl
    terraform {
      required_providers {
@@ -35,7 +35,7 @@ You'll need:
    }
    ```
 
-2. **Create an S3 bucket for state** (via CLI once, then Terraform will use it)
+2. **Create an S3 bucket for state** (via CLI once, then Terraform will use it) — [state locking docs](https://developer.hashicorp.com/terraform/language/state/locking)
    ```bash
    aws s3 mb s3://your-tf-state-bucket
    aws s3api put-bucket-versioning \
@@ -50,7 +50,7 @@ You'll need:
      --billing-mode PAY_PER_REQUEST
    ```
 
-3. **Create a VPC module from registry** — `main.tf`
+3. **Create a VPC module from registry** — `main.tf` — [AWS VPC module docs](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws)
    ```hcl
    module "vpc" {
      source  = "terraform-aws-modules/vpc/aws"
@@ -73,7 +73,7 @@ You'll need:
    }
    ```
 
-4. **Add a security group**
+4. **Add a security group** — [`aws_security_group` resource docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group)
    ```hcl
    resource "aws_security_group" "web_sg" {
      name   = "day17-web-sg"
@@ -99,7 +99,7 @@ You'll need:
    }
    ```
 
-5. **Launch an EC2 instance with user data**
+5. **Launch an EC2 instance with user data** — [`aws_instance` resource docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance), [`data.aws_ami` docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami)
    ```hcl
    data "aws_ami" "amazon_linux_2" {
      most_recent = true
@@ -137,7 +137,7 @@ You'll need:
    }
    ```
 
-6. **Create `variables.tf`** to make env reusable
+6. **Create `variables.tf`** to make env reusable — [input variable docs](https://developer.hashicorp.com/terraform/language/values/variables)
    ```hcl
    variable "environment" {
      description = "Environment name"

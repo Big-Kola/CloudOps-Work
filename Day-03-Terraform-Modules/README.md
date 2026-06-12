@@ -14,7 +14,7 @@ Modules are versioned and can come from the local filesystem, the Terraform Regi
 
 ## Task
 
-1. **Create the module structure**
+1. **Create the module structure** — [module docs](https://developer.hashicorp.com/terraform/language/modules)
    ```
    modules/
      file_writer/
@@ -23,7 +23,7 @@ Modules are versioned and can come from the local filesystem, the Terraform Regi
        outputs.tf
    ```
 
-2. **`modules/file_writer/variables.tf`**
+2. **`modules/file_writer/variables.tf`** — [input variable docs](https://developer.hashicorp.com/terraform/language/values/variables)
    ```hcl
    variable "filename" {
      description = "Path to the output file"
@@ -42,7 +42,7 @@ Modules are versioned and can come from the local filesystem, the Terraform Regi
    }
    ```
 
-3. **`modules/file_writer/main.tf`**
+3. **`modules/file_writer/main.tf`** — [`local_file` resource docs](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)
    ```hcl
    resource "local_file" "this" {
      filename    = var.filename
@@ -51,7 +51,7 @@ Modules are versioned and can come from the local filesystem, the Terraform Regi
    }
    ```
 
-4. **`modules/file_writer/outputs.tf`**
+4. **`modules/file_writer/outputs.tf`** — [output value docs](https://developer.hashicorp.com/terraform/language/values/outputs)
    ```hcl
    output "file_path" {
      value       = local_file.this.filename
@@ -59,7 +59,7 @@ Modules are versioned and can come from the local filesystem, the Terraform Regi
    }
    ```
 
-5. **Root `main.tf`** — call the module twice
+5. **Root `main.tf`** — call the module twice — [calling module docs](https://developer.hashicorp.com/terraform/language/modules/syntax)
    ```hcl
    module "hello_en" {
      source   = "./modules/file_writer"

@@ -11,31 +11,31 @@ Kubernetes is a container orchestration platform. Key architecture:
 
 ## Task
 
-1. **Install kind** (Kubernetes in Docker) — https://kind.sigs.k8s.io/docs/user/quick-start/
+1. **Install kind** (Kubernetes in Docker) — [kind quick-start docs](https://kind.sigs.k8s.io/docs/user/quick-start/)
    ```bash
    curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.24.0/kind-linux-amd64
    chmod +x ./kind && sudo mv ./kind /usr/local/bin/kind
    ```
 
-2. **Create a cluster**
+2. **Create a cluster** — [kind create cluster docs](https://kind.sigs.k8s.io/docs/user/quick-start/#creating-a-cluster)
    ```bash
    kind create cluster --name cloudops
    ```
 
-3. **Verify**
+3. **Verify** — [`kubectl cluster-info` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#clusterinfo), [`kubectl get nodes` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#get)
    ```bash
    kubectl cluster-info
    kubectl get nodes
    ```
 
-4. **Run an imperative pod**
+4. **Run an imperative pod** — [`kubectl run` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run), [`kubectl describe` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#describe)
    ```bash
    kubectl run nginx --image=nginx --restart=Never
    kubectl get pods -o wide
    kubectl describe pod nginx
    ```
 
-5. **Create a declarative pod** — `pod.yaml`
+5. **Create a declarative pod** — `pod.yaml` — [pod YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/)
    ```yaml
    apiVersion: v1
    kind: Pod
@@ -51,7 +51,7 @@ Kubernetes is a container orchestration platform. Key architecture:
            - containerPort: 80
    ```
 
-6. **Apply it**
+6. **Apply it** — [`kubectl apply` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply), [`kubectl logs` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs), [`kubectl exec` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#exec)
    ```bash
    kubectl apply -f pod.yaml
    kubectl get pods
@@ -59,7 +59,7 @@ Kubernetes is a container orchestration platform. Key architecture:
    kubectl exec hello-pod -- sh -c "echo Pod is running"
    ```
 
-7. **Port-forward to access nginx**
+7. **Port-forward to access nginx** — [`kubectl port-forward` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward)
    ```bash
    kubectl port-forward pod/hello-pod 8080:80
    # In another terminal: curl http://localhost:8080

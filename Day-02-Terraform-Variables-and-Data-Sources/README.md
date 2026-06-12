@@ -13,7 +13,7 @@ Hardcoding values is the fastest way to create brittle, unreusable configs. Terr
 
 Start from Day 1's config and refactor it.
 
-1. **Create `variables.tf`**
+1. **Create `variables.tf`** — [input variable docs](https://developer.hashicorp.com/terraform/language/values/variables), [validation docs](https://developer.hashicorp.com/terraform/language/values/variables#validation)
    ```hcl
    variable "file_name" {
      description = "Path to the file"
@@ -38,7 +38,7 @@ Start from Day 1's config and refactor it.
    }
    ```
 
-2. **Update `main.tf`** to use the variables
+2. **Update `main.tf`** to use the variables — [`local_file` resource docs](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)
    ```hcl
    resource "local_file" "hello" {
      filename    = var.file_name
@@ -47,7 +47,7 @@ Start from Day 1's config and refactor it.
    }
    ```
 
-3. **Create `outputs.tf`**
+3. **Create `outputs.tf`** — [output value docs](https://developer.hashicorp.com/terraform/language/values/outputs)
    ```hcl
    output "file_path" {
      value       = local_file.hello.filename
@@ -60,7 +60,7 @@ Start from Day 1's config and refactor it.
    }
    ```
 
-4. **Use a data source** to read the file back
+4. **Use a data source** to read the file back — [data source docs](https://developer.hashicorp.com/terraform/language/data-sources), [`local_file` data source](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file)
    ```hcl
    data "local_file" "read_hello" {
      filename = var.file_name
@@ -71,7 +71,7 @@ Start from Day 1's config and refactor it.
    }
    ```
 
-5. **Create `terraform.tfvars`** with actual values
+5. **Create `terraform.tfvars`** with actual values — [`.tfvars` file docs](https://developer.hashicorp.com/terraform/language/values/variables#variable-definitions-tfvars-files)
    ```hcl
    file_name    = "greeting.txt"
    file_content = "Hello from variables!"
@@ -79,7 +79,7 @@ Start from Day 1's config and refactor it.
 
 6. **Run** `terraform init`, `terraform plan`, `terraform apply --auto-approve`
 
-7. **Override with CLI** — `terraform apply -var="file_content=CLI override" --auto-approve`
+7. **Override with CLI** — `terraform apply -var="file_content=CLI override" --auto-approve` — [CLI var override docs](https://developer.hashicorp.com/terraform/cli/commands/apply#var)
 
 8. **Try an invalid value** — set `file_content = ""` in `terraform.tfvars` and run `plan`. Observe the validation error.
 

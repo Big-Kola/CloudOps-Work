@@ -15,13 +15,13 @@
 
 ### RBAC
 
-1. **Create a namespace and service account**
+1. **Create a namespace and service account** — [RBAC docs](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
    ```bash
    kubectl create namespace team-a
    kubectl create serviceaccount app-sa -n team-a
    ```
 
-2. **Create a Role** — `role.yaml`
+2. **Create a Role** — `role.yaml` — [Role & ClusterRole docs](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole)
    ```yaml
    apiVersion: rbac.authorization.k8s.io/v1
    kind: Role
@@ -34,7 +34,7 @@
        verbs: ["get", "list", "watch"]
    ```
 
-3. **Bind the role** — `rolebinding.yaml`
+3. **Bind the role** — `rolebinding.yaml` — [RoleBinding & ClusterRoleBinding docs](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding)
    ```yaml
    apiVersion: rbac.authorization.k8s.io/v1
    kind: RoleBinding
@@ -51,7 +51,7 @@
      apiGroup: rbac.authorization.k8s.io
    ```
 
-4. **Test RBAC**
+4. **Test RBAC** — [`kubectl auth can-i` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#auth)
    ```bash
    kubectl auth can-i get pods --as=system:serviceaccount:team-a:app-sa -n team-a
    kubectl auth can-i delete pods --as=system:serviceaccount:team-a:app-sa -n team-a
@@ -84,7 +84,7 @@
          image: nginx:alpine
    ```
 
-6. **Apply a Network Policy** — `netpol.yaml`
+6. **Apply a Network Policy** — `netpol.yaml` — [NetworkPolicy docs](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
    ```yaml
    apiVersion: networking.k8s.io/v1
    kind: NetworkPolicy
@@ -109,12 +109,12 @@
 
 ### Monitoring
 
-8. **Install metrics-server**
+8. **Install metrics-server** — [metrics-server docs](https://github.com/kubernetes-sigs/metrics-server)
    ```bash
    kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
    ```
 
-9. **View metrics**
+9. **View metrics** — [`kubectl top` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#top)
    ```bash
    kubectl top nodes
    kubectl top pods

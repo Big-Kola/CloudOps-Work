@@ -8,12 +8,12 @@
 
 ## Task
 
-1. **Create an ECR repository**
+1. **Create an ECR repository** — [ECR docs](https://docs.aws.amazon.com/AmazonECR/latest/userguide/)
    ```bash
    aws ecr create-repository --repository-name hello-app
    ```
 
-2. **Build and push an image**
+2. **Build and push an image** — [`aws ecr get-login-password` docs](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/ecr/get-login-password.html)
    ```bash
    # Get the login command
    aws ecr get-login-password --region us-east-1 | \
@@ -32,7 +32,7 @@
    docker push <account>.dkr.ecr.us-east-1.amazonaws.com/hello-app:latest
    ```
 
-3. **Create an EKS cluster** (this takes ~10-15 min)
+3. **Create an EKS cluster** (this takes ~10-15 min) — [EKS docs](https://docs.aws.amazon.com/eks/latest/userguide/)
    ```bash
    aws eks create-cluster \
      --name cloudops-cluster \
@@ -41,7 +41,7 @@
    aws eks wait cluster-active --name cloudops-cluster
    ```
 
-4. **Create a node group**
+4. **Create a node group** — [EKS managed node group docs](https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html)
    ```bash
    aws eks create-nodegroup \
      --cluster-name cloudops-cluster \
@@ -52,13 +52,13 @@
      --node-role arn:aws:iam::<account>:role/EKS-Worker-Role
    ```
 
-5. **Configure kubectl**
+5. **Configure kubectl** — [`aws eks update-kubeconfig` docs](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/eks/update-kubeconfig.html)
    ```bash
    aws eks update-kubeconfig --name cloudops-cluster --region us-east-1
    kubectl get nodes
    ```
 
-6. **Deploy the image from ECR** — `deploy.yaml`
+6. **Deploy the image from ECR** — `deploy.yaml` — [Deployment YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/), [Service YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/)
    ```yaml
    apiVersion: apps/v1
    kind: Deployment

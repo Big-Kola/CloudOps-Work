@@ -10,14 +10,14 @@
 
 ## Task
 
-1. **Create namespaces**
+1. **Create namespaces** — [namespace docs](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
    ```bash
    kubectl create namespace dev
    kubectl create namespace prod
    kubectl get namespaces
    ```
 
-2. **Create a ConfigMap** — `configmap.yaml`
+2. **Create a ConfigMap** — `configmap.yaml` — [ConfigMap YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/config-map-v1/)
    ```yaml
    apiVersion: v1
    kind: ConfigMap
@@ -32,7 +32,7 @@
        max_connections=100
    ```
 
-3. **Create a Secret** — `secret.yaml`
+3. **Create a Secret** — `secret.yaml` — [Secret YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/)
    ```yaml
    apiVersion: v1
    kind: Secret
@@ -45,7 +45,7 @@
      DB_USER: YWRtaW4=                # "admin" base64
    ```
 
-4. **Create a deployment that uses both** — `deploy.yaml`
+4. **Create a deployment that uses both** — `deploy.yaml` — [Configuring Pods with ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/), [Distributing Secrets](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/)
    ```yaml
    apiVersion: apps/v1
    kind: Deployment
@@ -104,7 +104,7 @@
    kubectl exec -n dev deploy/app -- ls /etc/secrets
    ```
 
-7. **Resource quota in namespace** — `quota.yaml`
+7. **Resource quota in namespace** — `quota.yaml` — [ResourceQuota docs](https://kubernetes.io/docs/concepts/policy/resource-quotas/)
    ```yaml
    apiVersion: v1
    kind: ResourceQuota

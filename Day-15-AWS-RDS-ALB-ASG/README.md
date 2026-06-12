@@ -10,7 +10,7 @@
 
 ## Task
 
-1. **Create a security group for RDS**
+1. **Create a security group for RDS** — [EC2 security group docs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html)
    ```bash
    aws ec2 create-security-group \
      --group-name rds-sg \
@@ -24,7 +24,7 @@
      --source-group sg-app
    ```
 
-2. **Create an RDS instance**
+2. **Create an RDS instance** — [RDS docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/)
    ```bash
    aws rds create-db-instance \
      --db-instance-identifier mydb \
@@ -37,7 +37,7 @@
    ```
    Wait for it: `aws rds wait db-instance-available --db-instance-identifier mydb`
 
-3. **Create a launch template for ASG**
+3. **Create a launch template for ASG** — [launch template docs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
    ```bash
    aws ec2 create-launch-template \
      --launch-template-name web-template \
@@ -52,7 +52,7 @@
      }'
    ```
 
-4. **Create an ALB**
+4. **Create an ALB** — [ALB docs](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/)
    ```bash
    aws elbv2 create-load-balancer \
      --name web-alb \
@@ -73,7 +73,7 @@
      --default-actions Type=Forward,TargetGroupArn=arn:tg
    ```
 
-5. **Create an Auto Scaling Group**
+5. **Create an Auto Scaling Group** — [ASG docs](https://docs.aws.amazon.com/autoscaling/ec2/userguide/)
    ```bash
    aws autoscaling create-auto-scaling-group \
      --auto-scaling-group-name web-asg \

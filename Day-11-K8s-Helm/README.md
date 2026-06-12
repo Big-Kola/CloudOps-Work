@@ -21,9 +21,9 @@ mychart/
 
 ## Task
 
-1. **Install Helm** — https://helm.sh/docs/intro/install/
+1. **Install Helm** — [Helm install docs](https://helm.sh/docs/intro/install/)
 
-2. **Create a chart**
+2. **Create a chart** — [`helm create` docs](https://helm.sh/docs/helm/helm_create/), [chart structure docs](https://helm.sh/docs/topics/charts/)
    ```bash
    helm create myapp
    tree myapp  # see the structure
@@ -31,7 +31,7 @@ mychart/
 
 3. **Examine the default chart** — look at `Chart.yaml`, `values.yaml`, and `templates/deployment.yaml`
 
-4. **Customize `values.yaml`**
+4. **Customize `values.yaml`** — [values file docs](https://helm.sh/docs/chart_template_guide/values_files/)
    ```yaml
    replicaCount: 2
 
@@ -56,33 +56,33 @@ mychart/
        memory: 128Mi
    ```
 
-5. **Install the chart**
+5. **Install the chart** — [`helm install` docs](https://helm.sh/docs/helm/helm_install/)
    ```bash
    helm install myapp-release ./myapp
    helm list
    kubectl get all -l app.kubernetes.io/instance=myapp-release
    ```
 
-6. **Upgrade with new values**
+6. **Upgrade with new values** — [`helm upgrade` docs](https://helm.sh/docs/helm/helm_upgrade/)
    ```bash
    helm upgrade myapp-release ./myapp --set replicaCount=3,image.tag=1.25-alpine
    kubectl get pods
    ```
 
-7. **Rollback**
+7. **Rollback** — [`helm rollback` docs](https://helm.sh/docs/helm/helm_rollback/)
    ```bash
    helm rollback myapp-release 1
    kubectl get pods
    ```
 
-8. **Search public charts**
+8. **Search public charts** — [ArtifactHub](https://artifacthub.io/), [Bitnami charts](https://charts.bitnami.com/)
    ```bash
    helm repo add bitnami https://charts.bitnami.com/bitnami
    helm search repo bitnami/nginx
    helm install bitnami-nginx bitnami/nginx --set service.type=ClusterIP
    ```
 
-9. **Uninstall**
+9. **Uninstall** — [`helm uninstall` docs](https://helm.sh/docs/helm/helm_uninstall/)
    ```bash
    helm uninstall myapp-release
    helm uninstall bitnami-nginx

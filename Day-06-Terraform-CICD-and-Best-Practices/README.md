@@ -31,7 +31,7 @@ Terraform in production means automation, collaboration, and guardrails. Key pra
    file_content = "your-content-here"
    ```
 
-4. **`Makefile`**
+4. **`Makefile`** — [`terraform fmt` docs](https://developer.hashicorp.com/terraform/cli/commands/fmt), [`terraform validate` docs](https://developer.hashicorp.com/terraform/cli/commands/validate)
    ```makefile
    .PHONY: fmt validate plan apply destroy clean
 
@@ -56,7 +56,7 @@ Terraform in production means automation, collaboration, and guardrails. Key pra
    	rm -rf .terraform terraform.tfstate* *.txt
    ```
 
-5. **Create `.github/workflows/terraform.yml`**
+5. **Create `.github/workflows/terraform.yml`** — [Terraform + GitHub Actions docs](https://developer.hashicorp.com/terraform/tutorials/automation/github-actions), [`setup-terraform` action](https://github.com/hashicorp/setup-terraform)
    ```yaml
    name: Terraform CI
 
@@ -93,7 +93,7 @@ Terraform in production means automation, collaboration, and guardrails. Key pra
 
 6. **Push this to your GitHub repo** and open a PR (even to yourself) to see the workflow run
 
-7. **Add `terraform.tfvars` to `.gitignore`**
+7. **Add `terraform.tfvars` to `.gitignore`** — [Terraform .gitignore docs](https://developer.hashicorp.com/terraform/tutorials/cloud/cloud-workspace-create#ignore-local-files)
    ```
    terraform.tfvars
    *.tfstate

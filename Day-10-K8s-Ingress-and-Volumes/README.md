@@ -12,12 +12,12 @@
 
 ## Task
 
-1. **Install an Ingress controller**
+1. **Install an Ingress controller** — [ingress-nginx deploy docs](https://kubernetes.github.io/ingress-nginx/deploy/)
    ```bash
    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
    ```
 
-2. **Wait for it to be ready**
+2. **Wait for it to be ready** — [`kubectl wait` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#wait)
    ```bash
    kubectl wait --namespace ingress-nginx \
      --for=condition=ready pod \
@@ -25,7 +25,7 @@
      --timeout=180s
    ```
 
-3. **Create a deployment and service**
+3. **Create a deployment and service** — [Deployment YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/), [Service YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/)
    ```yaml
    # cafe.yaml
    apiVersion: apps/v1
@@ -59,7 +59,7 @@
        - port: 80
    ```
 
-4. **Create an Ingress**
+4. **Create an Ingress** — [Ingress YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/ingress-v1/)
    ```yaml
    # ingress.yaml
    apiVersion: networking.k8s.io/v1
@@ -92,7 +92,7 @@
    # curl http://cafe.local:8080/coffee
    ```
 
-6. **Create a PVC and pod that uses it** — `volume.yaml`
+6. **Create a PVC and pod that uses it** — `volume.yaml` — [PVC YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/config-and-storage-resources/persistent-volume-claim-v1/), [volumes docs](https://kubernetes.io/docs/concepts/storage/volumes/)
    ```yaml
    apiVersion: v1
    kind: PersistentVolumeClaim

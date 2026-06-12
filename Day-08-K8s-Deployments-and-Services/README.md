@@ -11,7 +11,7 @@
 
 ## Task
 
-1. **Create `deployment.yaml`**
+1. **Create `deployment.yaml`** — [Deployment YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/)
    ```yaml
    apiVersion: apps/v1
    kind: Deployment
@@ -34,7 +34,7 @@
                - containerPort: 80
    ```
 
-2. **Create `service.yaml`**
+2. **Create `service.yaml`** — [Service YAML reference](https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/)
    ```yaml
    apiVersion: v1
    kind: Service
@@ -49,13 +49,13 @@
      type: ClusterIP
    ```
 
-3. **Apply both**
+3. **Apply both** — [`kubectl apply` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#apply)
    ```bash
    kubectl apply -f deployment.yaml
    kubectl apply -f service.yaml
    ```
 
-4. **Examine the deployment**
+4. **Examine the deployment** — [`kubectl describe` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#describe)
    ```bash
    kubectl get deployments
    kubectl get replicasets
@@ -72,19 +72,19 @@
    kubectl run test-pod --image=busybox --rm -it --restart=Never -- wget -qO- http://nginx-svc
    ```
 
-6. **Perform a rolling update**
+6. **Perform a rolling update** — [rolling update docs](https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/), [`kubectl rollout` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout)
    ```bash
    kubectl set image deployment/nginx-deploy nginx=nginx:1.25-alpine
    kubectl rollout status deployment/nginx-deploy
    ```
 
-7. **Rollback**
+7. **Rollback** — [`kubectl rollout undo` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout)
    ```bash
    kubectl rollout undo deployment/nginx-deploy
    kubectl rollout status deployment/nginx-deploy
    ```
 
-8. **Scale up**
+8. **Scale up** — [`kubectl scale` docs](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#scale)
    ```bash
    kubectl scale deployment/nginx-deploy --replicas=5
    ```

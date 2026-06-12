@@ -32,7 +32,7 @@ This is a large task. Break it into stages.
            └── outputs.tf
    ```
 
-2. **`provider.tf`** — AWS + Kubernetes + Helm providers
+2. **`provider.tf`** — AWS + Kubernetes + Helm providers — [AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs), [Kubernetes provider](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs), [Helm provider](https://registry.terraform.io/providers/hashicorp/helm/latest/docs)
    ```hcl
    terraform {
      required_providers {
@@ -85,7 +85,7 @@ This is a large task. Break it into stages.
    }
    ```
 
-3. **`main.tf`** — VPC + EKS + ECR
+3. **`main.tf`** — VPC + EKS + ECR — [AWS VPC module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws), [AWS EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws), [`aws_ecr_repository` resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository)
    ```hcl
    module "vpc" {
      source  = "terraform-aws-modules/vpc/aws"
@@ -144,7 +144,7 @@ This is a large task. Break it into stages.
 
 ### Stage 2: Deploy the app via Terraform Kubernetes provider
 
-5. **`modules/app/main.tf`** — deploy an nginx app
+5. **`modules/app/main.tf`** — deploy an nginx app — [`kubernetes_namespace` resource](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace), [`kubernetes_deployment` resource](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/deployment), [`kubernetes_service` resource](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service)
    ```hcl
    variable "namespace" {
      type    = string
@@ -233,7 +233,7 @@ This is a large task. Break it into stages.
 
 ### Stage 3: CI/CD with GitHub Actions
 
-8. **`.github/workflows/deploy.yml`**
+8. **`.github/workflows/deploy.yml`** — [GitHub Actions ECR login](https://github.com/aws-actions/amazon-ecr-login), [setup-terraform action](https://github.com/hashicorp/setup-terraform)
    ```yaml
    name: Build and Deploy
 

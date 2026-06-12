@@ -16,7 +16,7 @@ Meta-arguments are special arguments available on every resource that change how
 
 ## Task
 
-1. **Create `main.tf` with `for_each`**
+1. **Create `main.tf` with `for_each`** — [`for_each` docs](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each)
    ```hcl
    variable "files" {
      description = "Map of filename to content"
@@ -35,7 +35,7 @@ Meta-arguments are special arguments available on every resource that change how
    }
    ```
 
-2. **Add `count` example**
+2. **Add `count` example** — [`count` docs](https://developer.hashicorp.com/terraform/language/meta-arguments/count)
    ```hcl
    resource "local_file" "numbered" {
      count    = 3
@@ -44,7 +44,7 @@ Meta-arguments are special arguments available on every resource that change how
    }
    ```
 
-3. **Add `lifecycle` rules**
+3. **Add `lifecycle` rules** — [`lifecycle` docs](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle)
    ```hcl
    resource "local_file" "protected" {
      filename = "${path.module}/critical.txt"
@@ -68,7 +68,7 @@ Meta-arguments are special arguments available on every resource that change how
    }
    ```
 
-4. **Add explicit `depends_on`**
+4. **Add explicit `depends_on`** — [`depends_on` docs](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on)
    ```hcl
    resource "local_file" "depends_demo" {
      filename = "${path.module}/after-everything.txt"

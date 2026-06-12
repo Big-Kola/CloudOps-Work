@@ -13,7 +13,7 @@ The **`terraform_remote_state`** data source lets one config read another config
 
 ## Task
 
-1. **Create two separate configs** to demonstrate cross-stack state sharing.
+1. **Create two separate configs** to demonstrate cross-stack state sharing — [backend config docs](https://developer.hashicorp.com/terraform/language/settings/backends/configuration), [`terraform_remote_state` data source docs](https://developer.hashicorp.com/terraform/language/state/remote-state-data)
 
    **Config A (state-producer) — `Day-04-Terraform-State-and-Backends/producer/`**
    ```hcl
@@ -72,7 +72,7 @@ The **`terraform_remote_state`** data source lets one config read another config
 
 4. **Verify** — Check `consumed-output.txt` — it contains the path from the producer's state.
 
-5. **Add a `random` resource** to the producer to simulate a generated secret. Mark the output as `sensitive = true`. See what happens in the consumer.
+5. **Add a `random` resource** to the producer — [`random` provider docs](https://registry.terraform.io/providers/hashicorp/random/latest). Mark the output as `sensitive = true`. See what happens in the consumer.
 
 ## Real-world relevance
 

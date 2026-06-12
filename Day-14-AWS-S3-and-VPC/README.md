@@ -23,12 +23,12 @@
 
 ### S3
 
-1. **Create a bucket**
+1. **Create a bucket** — [S3 docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/)
    ```bash
    aws s3 mb s3://cloudops-tasks-$(aws sts get-caller-identity --query Account --output text)
    ```
 
-2. **Upload and manage objects**
+2. **Upload and manage objects** — [`aws s3 cp` docs](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/cp.html), [`aws s3 presign` docs](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/presign.html)
    ```bash
    echo "Hello S3" > hello.txt
    aws s3 cp hello.txt s3://your-bucket/
@@ -36,7 +36,7 @@
    aws s3 presign s3://your-bucket/hello.txt --expires-in 3600
    ```
 
-3. **Enable versioning**
+3. **Enable versioning** — [S3 versioning docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html)
    ```bash
    aws s3api put-bucket-versioning \
      --bucket your-bucket \
@@ -44,7 +44,7 @@
    aws s3api list-object-versions --bucket your-bucket
    ```
 
-4. **Apply a bucket policy** — `policy.json`
+4. **Apply a bucket policy** — `policy.json` — [S3 bucket policy docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-policies.html)
    ```json
    {
      "Version": "2012-10-17",
@@ -69,32 +69,32 @@
 
 ### VPC
 
-5. **Create a VPC**
+5. **Create a VPC** — [VPC docs](https://docs.aws.amazon.com/vpc/latest/userguide/)
    ```bash
    aws ec2 create-vpc --cidr-block 10.0.0.0/16
    # Note the VPC ID, let's say vpc-xxxx
    ```
 
-6. **Create subnets**
+6. **Create subnets** — [VPC subnet docs](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html)
    ```bash
    aws ec2 create-subnet --vpc-id vpc-xxxx --cidr-block 10.0.1.0/24
    aws ec2 create-subnet --vpc-id vpc-xxxx --cidr-block 10.0.2.0/24
    ```
 
-7. **Create and attach an Internet Gateway**
+7. **Create and attach an Internet Gateway** — [IGW docs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)
    ```bash
    aws ec2 create-internet-gateway
    aws ec2 attach-internet-gateway --vpc-id vpc-xxxx --internet-gateway-id igw-xxxx
    ```
 
-8. **Create a route table for public subnet**
+8. **Create a route table for public subnet** — [route table docs](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)
    ```bash
    aws ec2 create-route-table --vpc-id vpc-xxxx
    aws ec2 create-route --route-table-id rtb-xxxx --destination-cidr-block 0.0.0.0/0 --gateway-id igw-xxxx
    aws ec2 associate-route-table --route-table-id rtb-xxxx --subnet-id subnet-xxxx
    ```
 
-9. **Add a NACL to block SSH from a specific IP** — or just observe the default NACL (allows all).
+9. **Add a NACL to block SSH from a specific IP** — or just observe the default NACL (allows all). — [NACL docs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html)
    ```bash
    # Replace the default NACL entry to deny SSH from 0.0.0.0/0
    aws ec2 describe-network-acls --filters "Name=vpc-id,Values=vpc-xxxx"

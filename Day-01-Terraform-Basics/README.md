@@ -23,7 +23,7 @@ Do these steps in the `Day-01-Terraform-Basics/` folder.
    - Download from https://developer.hashicorp.com/terraform/install
    - Verify: `terraform --version`
 
-2. **Create `main.tf`**
+2. **Create `main.tf`** — [`local_file` resource docs](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file)
    ```hcl
    terraform {
      required_providers {
@@ -40,22 +40,22 @@ Do these steps in the `Day-01-Terraform-Basics/` folder.
    }
    ```
 
-3. **Initialize** — `terraform init`  
+3. **Initialize** — `terraform init` — [`terraform init` docs](https://developer.hashicorp.com/terraform/cli/commands/init)
    Observe: downloads the local provider plugin, creates `.terraform.lock.hcl`.
 
-4. **Preview** — `terraform plan`  
+4. **Preview** — `terraform plan` — [`terraform plan` docs](https://developer.hashicorp.com/terraform/cli/commands/plan)
    Observe: shows what will be created (green +). No actual changes yet.
 
-5. **Apply** — `terraform apply --auto-approve`  
+5. **Apply** — `terraform apply --auto-approve` — [`terraform apply` docs](https://developer.hashicorp.com/terraform/cli/commands/apply)
    Observe: creates `hello.txt`. A `terraform.tfstate` file appears.
 
-6. **Inspect state** — `cat terraform.tfstate`  
+6. **Inspect state** — `cat terraform.tfstate` — [state docs](https://developer.hashicorp.com/terraform/language/state)
    Notice: it stores the resource type, name, attributes (filename, content), and a unique ID.
 
-7. **Destroy** — `terraform destroy --auto-approve`  
+7. **Destroy** — `terraform destroy --auto-approve` — [`terraform destroy` docs](https://developer.hashicorp.com/terraform/cli/commands/destroy)
    Observe: removes `hello.txt`. The state file is updated to reflect deletion.
 
-8. **Bonus:** Run `terraform show` after apply to see the state in a human-readable format.
+8. **Bonus:** Run `terraform show` after apply — [`terraform show` docs](https://developer.hashicorp.com/terraform/cli/commands/show)
 
 ## Real-world relevance
 
@@ -78,3 +78,14 @@ The state file is what enables teams to collaborate. It's checked into remote ba
 ## Interview Question
 
 Walk me through the Terraform workflow from start to finish. What does each command (`init`, `plan`, `apply`, `destroy`) do? What happens if you delete the state file and run `apply` again? Why is the state file considered critical infrastructure?
+
+Answer to interview question. 
+the tf workflow, init-plan-apply-destroy
+init-initialize
+plan-preview what tf will create
+apply-command to let teraform create resource
+destroy- command to destroy resources.
+
+If i delete statefile and apply again, tf doesnt know what it manages so tf may recreate duplicate resources. 
+
+state file is critical because it is tf source of truth, it lets terraform knows what it manages

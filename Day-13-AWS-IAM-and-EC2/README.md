@@ -19,20 +19,20 @@ Least privilege is the golden rule: grant only the permissions needed.
 
 ## Task
 
-1. **Create an IAM user with CLI access**
+1. **Create an IAM user with CLI access** — [IAM user docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html)
    ```bash
    aws iam create-user --user-name dev-user
    aws iam create-access-key --user-name dev-user
    ```
 
-2. **Attach a managed policy**
+2. **Attach a managed policy** — [IAM policy docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
    ```bash
    aws iam attach-user-policy \
      --user-name dev-user \
      --policy-arn arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess
    ```
 
-3. **Create an IAM role for EC2** — `ec2-role.json`
+3. **Create an IAM role for EC2** — `ec2-role.json` — [IAM role docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html), [IAM roles for EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
    ```json
    {
      "RoleName": "EC2-S3-ReadOnly-Role",
@@ -59,7 +59,7 @@ Least privilege is the golden rule: grant only the permissions needed.
      --role-name EC2-S3-ReadOnly-Role
    ```
 
-4. **Launch an EC2 instance**
+4. **Launch an EC2 instance** — [EC2 run-instances docs](https://docs.aws.amazon.com/cli/latest/reference/ec2/run-instances.html)
    ```bash
    # Get the latest Amazon Linux 2 AMI
    aws ec2 run-instances \
@@ -75,7 +75,7 @@ Least privilege is the golden rule: grant only the permissions needed.
        echo "Hello from EC2" > /var/www/html/index.html'
    ```
 
-5. **Connect via SSH**
+5. **Connect via SSH** — [EC2 SSH docs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-to-linux-instance.html)
    ```bash
    aws ec2 describe-instances --query "Reservations[*].Instances[*].PublicIpAddress"
    ssh -i your-key.pem ec2-user@<public-ip>
@@ -87,7 +87,7 @@ Least privilege is the golden rule: grant only the permissions needed.
    aws ec2 describe-instances  # should fail (no EC2 permission)
    ```
 
-7. **Terminate** — `aws ec2 terminate-instances --instance-ids <id>`
+7. **Terminate** — `aws ec2 terminate-instances --instance-ids <id>` — [EC2 terminate docs](https://docs.aws.amazon.com/cli/latest/reference/ec2/terminate-instances.html)
 
 ## Real-world relevance
 
