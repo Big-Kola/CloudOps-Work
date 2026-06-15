@@ -1,0 +1,3 @@
+# Copy this to terraform.tfvars and fill in your values
+file_name    = "config.txt"
+file_content = "your-content-here"
