@@ -12,11 +12,11 @@ I do the task, then come back to you for:
 
 ---
 
-**Progress:** Day 5 — completed
+**Progress:** Day 0 — Not started
 
-**Last completed:** day 4
+**Last completed:** None
 
-**Next up:** Day 5
+**Next up:** Day 1 — Terraform Basics (Providers, Resources, State)
 
 ---
 
