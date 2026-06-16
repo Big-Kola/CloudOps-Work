@@ -11,3 +11,5 @@ resource "local_file" "hello" {
   filename = "${path.module}/${var.file_name}"
   content  = var.file_content
 }
+
+# Terraform CI test.
