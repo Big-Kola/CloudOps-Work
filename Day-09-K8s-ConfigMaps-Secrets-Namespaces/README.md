@@ -87,7 +87,7 @@
                name: app-config
            - name: secret-volume
                secret:
-                 name: db-secret
+                 secretName: db-secret
    ```
 
 5. **Apply everything**
