@@ -106,6 +106,20 @@
    ```
 
 7. **Test** — exec into frontend, curl backend. Then exec into backend, try curling itself or anything else.
+    ```bash
+    # Create a Service so pods can reach each other by name
+    kubectl expose pod backend --port=80
+    kubectl expose pod frontend --port=80
+
+    # Exec into frontend and curl backend (should succeed)
+    kubectl exec frontend -- curl -s http://backend
+
+    # Exec into backend and curl itself (should succeed)
+    kubectl exec backend -- curl -s http://backend
+
+    # Exec into backend and curl frontend (should timeout — blocked by NetworkPolicy)
+    kubectl exec backend -- curl -s -m 3 http://frontend
+    ```
 
 ### Monitoring
 
