@@ -12,11 +12,11 @@ I do the task, then come back to you for:
 
 ---
 
-**Progress:** Day 12 — completed
+**Progress:** Day 13 — completed
 
-**Last completed:** day 12
+**Last completed:** day 13
 
-**Next up:** Day 13
+**Next up:** Day 14
 
 ---
 

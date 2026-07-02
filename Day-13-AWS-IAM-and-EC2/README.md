@@ -78,7 +78,7 @@ Least privilege is the golden rule: grant only the permissions needed.
 5. **Connect via SSH** — [EC2 SSH docs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-to-linux-instance.html)
    ```bash
    aws ec2 describe-instances --query "Reservations[*].Instances[*].PublicIpAddress"
-   ssh -i your-key.pem ec2-user@<public-ip>
+   ssh -i my-key.pem ec2-user@<public-ip>
    ```
 
 6. **Test the IAM role** (inside the instance)
